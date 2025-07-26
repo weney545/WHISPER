@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHISPER: A Mobile Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mobile-frame">
+        <div id="status-bar">
+            <span id="time">12:00 PM</span>
+            <span class="status-icons">📶 🔋</span>
+        </div>
+
+        <div id="login-screen" class="active-screen">
+            <img src="WHISPER.jpg" alt="App Logo" class="app-logo">
+            <h1>WHISPER</h1>
+            <p>The Future of Optimization</p>
+            <form id="whisper-signin-form">
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <select id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <button type="submit">Sign In</button>
+                <p id="signin-message" class="hidden"></p>
+            </form>
+        </div>
+
+        <div id="permission-screen" class="hidden app-screen">
+            <div id="glitch-effect" class="hidden"></div>
+            <div id="evil-smile" class="hidden">:)</div>
+            <h2>WHISPER Requires Permissions</h2>
+            <p>To optimize your life, WHISPER requires access to your:</p>
+            <ul>
+                <li>Location Data</li>
+                <li>Contacts</li>
+                <li>Messages</li>
+                <li>Microphone</li>
+                <li>Camera</li>
+                <li>App Usage</li>
+                <li>Biometric Data</li>
+            </ul>
+            <p>Do you accept?</p>
+            <button id="permission-yes">Accept</button>
+            <button id="permission-no">Decline</button>
+        </div>
+
+        <div id="home-screen" class="hidden app-screen">
+            <div class="app-grid">
+                <div class="app-icon" id="whisper-icon">
+                    <img src="WHISPER.jpg" alt="Whisper Icon">
+                    <span>WHISPER</span>
+                    <span class="notification-dot hidden"></span>
+                </div>
+                <div class="app-icon" id="chat-icon">
+                    <img src="CHAT.jpg" alt="Chat Icon">
+                    <span>Chat</span>
+                    <span class="notification-dot hidden"></span>
+                </div>
+                <div class="app-icon" id="pulse-icon">
+                    <img src="PULSE.jpg" alt="Pulse Icon">
+                    <span>Pulse</span>
+                    <span class="notification-dot hidden"></span>
+                </div>
+                <div class="app-icon" id="gallery-icon">
+                    <img src="GALLERY.jpg" alt="Gallery Icon">
+                    <span>Gallery</span>
+                    <span class="notification-dot hidden"></span>
+                </div>
+                </div>
+        </div>
+
+        <div id="whisper-app-screen" class="hidden app-screen">
+            <div class="app-header">
+                <button class="back-button">←</button>
+                <h2>WHISPER</h2>
+            </div>
+            <div id="whisper-messages" class="message-area">
+                </div>
+            <div id="whisper-choices" class="choices-container hidden">
+                </div>
+        </div>
+
+        <div id="chat-app-screen" class="hidden app-screen">
+            <div class="app-header">
+                <button class="back-button">←</button>
+                <h2>Chat</h2>
+            </div>
+            <div id="chat-list">
+                </div>
+            <div id="current-chat" class="hidden">
+                <div class="chat-header">
+                    <button class="back-to-chat-list">←</button>
+                    <h3 id="current-chat-name"></h3>
+                </div>
+                <div id="chat-messages" class="message-area">
+                    </div>
+                <div id="chat-choices" class="choices-container hidden">
+                    </div>
+            </div>
+        </div>
+
+        <div id="pulse-app-screen" class="hidden app-screen">
+            <div class="app-header">
+                <button class="back-button">←</button>
+                <h2>Pulse News Feed</h2>
+            </div>
+            <div id="pulse-news-feed" class="news-feed-area">
+                </div>
+        </div>
+
+        <div id="gallery-app-screen" class="hidden app-screen">
+            <div class="app-header">
+                <button class="back-button">←</button>
+                <h2>Gallery</h2>
+            </div>
+            <div id="gallery-content">
+                <p>No new images yet.</p>
+                </div>
+        </div>
+
+        <div id="secret-ending-screen" class="hidden app-screen">
+            <div class="ending-content">
+                <h1 class="ending-headline"></h1>
+                <p class="ending-message"></p>
+                <p class="ending-subtext"></p>
+                <button id="replay-button">Replay</button>
+            </div>
+        </div>
+
+        <div id="chapter-transition-screen" class="full-screen hidden">
+            <h1 id="chapter-title-text"></h1>
+        </div>
+        
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

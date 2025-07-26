@@ -1,0 +1,625 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #222;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow: auto; /* ALLOW SCROLLING */
+}
+
+#mobile-frame {
+    width: 95vw; /* Make it responsive to viewport width */
+    height: 95vh; /* Make it responsive to viewport height */
+    /* Removed max-width and max-height to allow scrolling beyond initial screen limits if content dictates */
+    /* max-width: 360px; */
+    /* max-height: 640px; */
+    border: 10px solid #333;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background-color: #000;
+    position: relative;
+    overflow: auto; /* ENABLE SCROLLING INSIDE THE FRAME */
+    display: flex; /* Ensures its direct children (the screens) can fill it */
+    flex-direction: column; /* Stacks children vertically if needed */
+}
+
+#status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #111;
+    color: #00ffff;
+    font-size: 0.8em;
+    position: sticky; /* Sticky to top of mobile frame */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Ensure it's on top */
+    box-sizing: border-box;
+}
+
+.app-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Fill the mobile frame */
+    background-color: #1a1a1a;
+    color: #eee;
+    /* Increased padding-top further to ensure headline and message are visible */
+    padding-top: 75px; /* Increased from 60px to give more top space */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto; /* IMPORTANT: Allows content to scroll vertically */
+    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+}
+
+.hidden {
+    display: none !important;
+}
+
+.active-screen {
+    display: flex;
+    /* transform: translateX(0); */ /* Ensure active screen is in view */
+}
+
+/* Login Screen */
+#login-screen {
+    justify-content: flex-start; /* Aligns content to the top */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    padding-top: 50px; /* This padding is fine for login, independent of app-screen's global padding-top */
+}
+
+#login-screen .app-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+#login-screen h1 {
+    color: #00ffff;
+    margin-bottom: 5px;
+}
+
+#login-screen p {
+    color: #aaa;
+    margin-bottom: 30px; /* Increased margin to push the form down further */
+    font-style: italic;
+}
+
+#whisper-signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 250px;
+    /* margin-top: 20px; - No longer needed here as padding is on parent and p tag has margin-bottom */
+}
+
+#whisper-signin-form input,
+#whisper-signin-form select {
+    padding: 10px;
+    border-radius: 8px; /* Maintain rounded corners for overall shape */
+    border: none; /* Remove border for the flatter look */
+    border-bottom: 1px solid #00ffff; /* Add a bottom border for the line effect */
+    background-color: #444; /* Lighter background for inputs as seen in image */
+    color: #eee;
+    font-size: 1em;
+    /* Remove box-shadow for a flatter appearance */
+}
+
+#whisper-signin-form input::placeholder {
+    color: #bbb;
+}
+
+#whisper-signin-form input:focus,
+#whisper-signin-form select:focus {
+    outline: none; /* Remove default outline */
+    border-bottom-color: #007bff; /* Highlight bottom border on focus */
+    box-shadow: none; /* No box-shadow on focus either for this style */
+}
+
+#whisper-signin-form button {
+    padding: 10px;
+    border-radius: 8px; /* Keep consistent with inputs */
+    border: 1px solid #00ffff; /* Keep border for button */
+    background-color: #00ffff;
+    color: #1a1a1a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#whisper-signin-form button:hover {
+    background-color: #00cccc;
+}
+
+#signin-message {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #e74c3c;
+}
+
+/* Permission Screen */
+#permission-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+#permission-screen h2 {
+    color: #ff00ff;
+    margin-bottom: 15px;
+}
+
+#permission-screen ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 20px 0;
+    color: #ccc;
+}
+
+#permission-screen ul li {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #00ffff;
+}
+
+#permission-screen button {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#permission-yes {
+    background-color: #00ffff;
+    color: #1a1a1a;
+}
+
+#permission-yes:hover {
+    background-color: #00cccc;
+}
+
+#permission-no {
+    background-color: #ff00ff;
+    color: #1a1a1a;
+}
+
+#permission-no:hover {
+    background-color: #cc00cc;
+}
+
+/* Glitch Effect */
+#glitch-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'monospace';
+    font-size: 1em;
+    text-align: center;
+    line-height: 1;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding-top: 50px;
+    z-index: 20;
+}
+
+#evil-smile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8em;
+    color: #ff00ff;
+    text-shadow: 0 0 20px #ff00ff;
+    z-index: 25;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#evil-smile.active {
+    opacity: 1;
+}
+
+#evil-smile.move-to-chat {
+    animation: moveEvilSmile 1.5s forwards;
+}
+
+@keyframes moveEvilSmile {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-100px, -200px) scale(0.1); opacity: 0; } /* Adjust final position as needed */
+}
+
+
+/* Home Screen */
+#home-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px; /* Below status bar */
+    background-color: #1a1a1a;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 320px; /* Keep apps centered */
+}
+
+.app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    position: relative; /* For notification dot */
+}
+
+.app-icon img {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background-color: #333; /* Placeholder background */
+}
+
+.app-icon span {
+    color: #eee;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.notification-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    background-color: #ff00ff;
+    border-radius: 50%;
+    display: none;
+    border: 2px solid #1a1a1a; /* Border to make it pop on dark background */
+}
+
+.notification-dot.active {
+    display: block;
+}
+
+
+/* App Header (common for all apps) */
+.app-header {
+    width: 100%;
+    background-color: #2a2a2a;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: sticky; /* Sticky to top of the scrollable app screen */
+    top: 0; /* Changed to 0px, relative to its parent's increased padding-top */
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+.app-header h2, .chat-header h3 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    color: #00ffff;
+}
+
+.app-header button, .chat-header button {
+    background: none;
+    border: none;
+    color: #00ffff;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+/* Message Areas (common for Whisper and Chat) */
+.message-area {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto; /* Already had, keep */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #222;
+    flex: 1; /* Make it fill available space */
+}
+
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 15px;
+    word-wrap: break-word;
+    font-size: 0.9em;
+}
+
+.whisper-message {
+    align-self: flex-start;
+    background-color: #4a148c; /* Dark purple */
+    color: #fff;
+    border-bottom-left-radius: 2px;
+}
+
+.friend-message {
+    align-self: flex-start;
+    background-color: #444;
+    color: #fff;
+    border-bottom-left-radius: 2px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #00ffff;
+    color: #1a1a1a;
+    border-bottom-right-radius: 2px;
+}
+
+/* Choices Container */
+.choices-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #2a2a2a;
+    border-top: 1px solid #333;
+    flex-shrink: 0; /* Prevent choices from being cut off */
+}
+
+.choice-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.choice-button:hover {
+    background-color: #0056b3;
+}
+
+/* Chat App specific */
+#chat-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #222;
+}
+
+.chat-contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #333;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.chat-contact:hover {
+    background-color: #444;
+}
+
+.chat-contact-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #00ffff;
+    color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.chat-contact-info {
+    flex-grow: 1;
+    min-width: 0; /* Allow text ellipsis to work */
+}
+
+.chat-contact-info h4 {
+    margin: 0;
+    color: #eee;
+}
+
+.chat-contact-info p {
+    margin: 2px 0 0;
+    color: #bbb;
+    font-size: 0.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#current-chat {
+    position: absolute; /* Occupy full app screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    padding-top: 30px; /* For status bar */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow chat content to scroll */
+}
+
+.chat-header {
+    width: 100%;
+    background-color: #2a2a2a;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: sticky; /* Sticky to top of the scrollable current chat screen */
+    top: 30px; /* Below status bar */
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+
+/* Pulse App specific */
+#pulse-news-feed {
+    flex: 1;
+    overflow-y: auto; /* Already had, keep */
+    padding: 15px;
+    background-color: #222;
+}
+
+.news-article {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.news-article h4 {
+    color: #00ffff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.news-article p {
+    color: #ccc;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Gallery App specific */
+#gallery-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-size: 1.2em;
+    background-color: #222;
+}
+
+/* Secret Ending Screen */
+#secret-ending-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    z-index: 50; /* Ensure it's on top */
+}
+
+.ending-content {
+    max-width: 80%;
+}
+
+.ending-headline {
+    color: #ff00ff;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+.ending-message {
+    color: #eee;
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.ending-subtext {
+    color: #aaa;
+    font-size: 0.8em;
+    margin-bottom: 30px;
+}
+
+#replay-button {
+    padding: 12px 25px;
+    background-color: #00ffff;
+    color: #1a1a1a;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+#replay-button:hover {
+    background-color: #00cccc;
+}
+
+
+/* Chapter Transition Screen */
+#chapter-transition-screen {
+    position: fixed; /* Fixed to viewport, ensures it covers mobile frame */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Blackout effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it's on top of everything within the mobile frame */
+    opacity: 1; /* Start opaque, will fade out */
+    transition: opacity 1s ease-in-out; /* For fading the blackout */
+}
+
+#chapter-transition-screen.hidden {
+    display: none !important; /* Use !important to override flex display */
+    opacity: 0;
+}
+
+#chapter-title-text {
+    color: #fff; /* White text for chapter title */
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff; /* Subtle glow for effect */
+    opacity: 0; /* Start hidden, will fade in */
+    transition: opacity 1s ease-in-out; /* For fading the text */
+}
+
+#chapter-title-text.hidden {
+    opacity: 0; /* Ensure it stays hidden when not active */
+}
+
+/* General app screen children sizing */
+/* Flex-shrink 0 for children that should not be squished, allowing scrolling */
+.app-screen > *:not(.app-header):not(.choices-container):not(.message-area):not(.news-feed-area):not(#chat-list):not(#current-chat) {
+    flex-shrink: 0;
+}
